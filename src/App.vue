@@ -62,6 +62,7 @@
                     :theme2="theme2"
                     :theme3="theme3"
                     @counter="calculation"
+                    @click="del()"
                 ></key>
             </div>
             <div class="mx-7 flex items-center">
@@ -190,6 +191,21 @@ export default {
                 if (operator === "reset") this.counter = "0";
                 console.log("運算符號", operator);
             }
+        },
+        del() {
+            console.log("del things", this.counter[this.counter.length - 1]);
+            this.counter = this.setCharAt(
+                this.counter,
+                this.counter.length - 1,
+                ""
+            );
+            console.log("del do=", this.counter);
+        },
+        setCharAt(str, index, chr) {
+            //replace string special index
+            if (str.length === 1) return "0";
+            if (index > str.length - 1) return str;
+            return str.substring(0, index) + chr + str.substring(index + 1);
         },
     },
 };
