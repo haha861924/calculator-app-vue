@@ -145,6 +145,7 @@
                     :theme2="theme2"
                     :theme3="theme3"
                     @keycap="calculation"
+                    @click="equal"
                 ></key>
             </div>
         </div>
@@ -163,9 +164,9 @@ export default {
         return {
             theme: 1,
             keybord: 0,
-            keycap: 0,
             operator: "+",
             counter: "0",
+            previous: 0,
         };
     },
     computed: {
@@ -185,12 +186,20 @@ export default {
                 if (this.counter[0] === "0") {
                     this.counter = this.counter.slice(1);
                 }
-                this.counter = this.counter + operator;
-                // if (this.counter % 3 !== 0) console.log("加逗點");
+                this.counter =
+                    this.counter === 0
+                        ? `${operator}`
+                        : `${this.counter}${operator}`;
             } else {
                 if (operator === "reset") this.counter = "0";
                 console.log("運算符號", operator);
+                if (operator !== "=") {
+                    this.previous = this.counter;
+                    this.counter = "0";
+                    this.operator = operator;
+                }
             }
+            if (operator === "=") this.equal;
         },
         del() {
             console.log("del things", this.counter[this.counter.length - 1]);
@@ -206,6 +215,29 @@ export default {
             if (str.length === 1) return "0";
             if (index > str.length - 1) return str;
             return str.substring(0, index) + chr + str.substring(index + 1);
+        },
+        equal() {
+            switch (this.operator) {
+                case "+":
+                    this.counter =
+                        parseFloat(this.previous) + parseFloat(this.counter);
+                    break;
+                case "-":
+                    this.counter =
+                        parseFloat(this.previous) - parseFloat(this.counter);
+                    break;
+                case "X":
+                    this.counter =
+                        parseFloat(this.previous) * parseFloat(this.counter);
+                    break;
+                case "/":
+                    this.counter =
+                        parseFloat(this.previous) / parseFloat(this.counter);
+                    break;
+                default:
+                    console.log("other=", this.operator);
+                    break;
+            }
         },
     },
 };
