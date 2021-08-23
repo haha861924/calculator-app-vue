@@ -203,6 +203,7 @@ export default {
         },
         del() {
             console.log("del things", this.counter[this.counter.length - 1]);
+            this.counter = this.counter.toString();
             this.counter = this.setCharAt(
                 this.counter,
                 this.counter.length - 1,
