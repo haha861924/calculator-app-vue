@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-full h-full"
+        class="w-full h-full grid justify-items-center"
         id="main"
         :class="{
             'bg-theme1': theme1,
@@ -8,18 +8,24 @@
             'bg-theme3': theme3,
         }"
     >
-        <h1
-            :class="{
-                'text-white': theme1,
-                'text-text2': theme2,
-                'text-text3': theme3,
-            }"
-        >
-            calc
-        </h1>
+        四則運算狀態: {{ operator }}
+        <div class="flex items-center">
+            <h1
+                class="flex justify-start"
+                :class="{
+                    'text-white': theme1,
+                    'text-text2': theme2,
+                    'text-text3': theme3,
+                }"
+            >
+                calc
+            </h1>
+            <div class="flex justify-end"><h1>1122</h1></div>
+        </div>
+
         <!-- screen -->
         <div
-            class="rounded-xl p-8 w-5/12 h-32 m-6 overflow-hidden text-right"
+            class="rounded-xl p-8 w-5/12 h-32 m-6 overflow-hidden text-right grid items-center"
             :class="{
                 'bg-screen1': theme1,
                 'bg-screen2': theme2,
@@ -39,14 +45,14 @@
         </div>
         <!-- keypad -->
         <div
-            class="rounded-xl p-8 w-5/12 h-3/6 grid justify-items-center"
+            class="rounded-xl p-8 w-5/12 grid justify-items-stretch"
             :class="{
                 'bg-keypad1': theme1,
                 'bg-keypad2': theme2,
                 'bg-screen3': theme3,
             }"
         >
-            <div class="mx-7 flex items-center">
+            <div class="flex items-center">
                 <key
                     v-for="key in 3"
                     :key="key"
@@ -65,7 +71,7 @@
                     @click="del()"
                 ></key>
             </div>
-            <div class="mx-7 flex items-center">
+            <div class="flex items-center">
                 <key
                     v-for="key in 3"
                     :key="key"
@@ -83,7 +89,7 @@
                     @keycap="calculation"
                 ></key>
             </div>
-            <div class="mx-7 flex items-center">
+            <div class="flex items-center">
                 <key
                     v-for="key in 3"
                     :key="key"
@@ -101,7 +107,7 @@
                     @keycap="calculation"
                 ></key>
             </div>
-            <div class="mx-7 flex items-center">
+            <div class="flex items-center">
                 <key
                     :label="'.'"
                     :theme1="theme1"
@@ -131,7 +137,7 @@
                     @keycap="calculation"
                 ></key>
             </div>
-            <div class="mx-7 flex items-center">
+            <div class="flex items-center">
                 <key
                     :label="'reset'"
                     :theme1="theme1"
@@ -145,13 +151,15 @@
                     :theme2="theme2"
                     :theme3="theme3"
                     @keycap="calculation"
-                    @click="equal"
+                    @click="equal('again')"
                 ></key>
             </div>
         </div>
-        <button @click="theme = 1">hello</button>
-        <button @click="theme = 2">hello</button>
-        <button @click="theme = 3">hello</button>
+        <div class="flex items-center">
+            <button @click="theme = 1">hello</button>
+            <button @click="theme = 2">hello</button>
+            <button @click="theme = 3">hello</button>
+        </div>
     </div>
 </template>
 
