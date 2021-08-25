@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-full h-full grid justify-items-center"
+        class="w-full h-screen grid justify-items-center"
         id="main"
         :class="{
             'bg-theme1': theme1,
