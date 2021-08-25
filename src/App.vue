@@ -8,7 +8,6 @@
             'bg-theme3': theme3,
         }"
     >
-        四則運算狀態: {{ operator }}
         <div class="flex items-center">
             <h1
                 class="flex justify-start"
@@ -45,7 +44,7 @@
         </div>
         <!-- keypad -->
         <div
-            class="rounded-xl p-8 w-5/12 grid justify-items-stretch"
+            class="rounded-xl p-8 grid justify-items-stretch"
             :class="{
                 'bg-keypad1': theme1,
                 'bg-keypad2': theme2,
@@ -200,24 +199,22 @@ export default {
                         : `${this.counter}${operator}`;
             } else {
                 if (operator === "reset") this.counter = "0";
-                console.log("運算符號", operator);
-                if (operator !== "=") {
+                if (operator === ".")
+                    this.counter = `${this.counter}${operator}`;
+                if (operator !== "=" && operator !== ".") {
                     this.previous = this.counter;
                     this.counter = "0";
                     this.operator = operator;
                 }
             }
-            if (operator === "=") this.equal;
         },
         del() {
-            console.log("del things", this.counter[this.counter.length - 1]);
             this.counter = this.counter.toString();
             this.counter = this.setCharAt(
                 this.counter,
                 this.counter.length - 1,
                 ""
             );
-            console.log("del do=", this.counter);
         },
         setCharAt(str, index, chr) {
             //replace string special index
@@ -226,6 +223,15 @@ export default {
             return str.substring(0, index) + chr + str.substring(index + 1);
         },
         equal() {
+            let tenCount = 0;
+            if (this.counter.indexOf(".") !== -1) {
+                this.counter = this.counter * 10;
+                tenCount += 1;
+            }
+            if (this.previous.indexOf(".") !== -1) {
+                this.previous = this.previous * 10;
+                tenCount += 1;
+            }
             switch (this.operator) {
                 case "+":
                     this.counter =
@@ -238,10 +244,14 @@ export default {
                 case "X":
                     this.counter =
                         parseFloat(this.previous) * parseFloat(this.counter);
+                    if (tenCount === 1) this.counter = this.counter / 10;
+                    if (tenCount === 2) this.counter = this.counter / 100;
                     break;
                 case "/":
                     this.counter =
                         parseFloat(this.previous) / parseFloat(this.counter);
+                    if (tenCount === 1) this.counter = this.counter / 10;
+                    if (tenCount === 2) this.counter = this.counter / 100;
                     break;
                 default:
                     console.log("other=", this.operator);
