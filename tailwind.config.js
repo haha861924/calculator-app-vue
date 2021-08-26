@@ -23,7 +23,14 @@ module.exports = {
         purple: '#56077C',
         red: '#D03F2F',
         orange: '#C85402',
-        'light-blue': '#00DED0'
+        'light-blue': '#00DED0',
+        'click-purple': '#6C34AC',
+        'click-purplest': '#8631AF',
+        'click-blue': '#A2B2E1',
+        'click-green': '#62B5BC',
+        'equal-red': '#F96B5B',
+        'equal-orange': '#FF8A38',
+        'equal-blue': '#93FFF8',
       },
       boxShadow: {
         shaddow1: 'inset 0px -4px 0px #B3A497',
