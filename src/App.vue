@@ -69,6 +69,11 @@
                     @counter="calculation"
                     @click="del()"
                 ></key>
+                    {{
+                        new Intl.NumberFormat("en-US", {
+                            style: "decimal",
+                        }).format(counter)
+                    }}
             </div>
             <div class="flex items-center">
                 <key
