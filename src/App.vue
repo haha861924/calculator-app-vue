@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-full h-screen grid justify-items-center"
+        class="w-full h-screen"
         id="main"
         :class="{
             'bg-theme1': theme1,
@@ -8,170 +8,170 @@
             'bg-theme3': theme3,
         }"
     >
-        <div class="flex items-center">
+        <!-- title-->
+        <div class="grid grid-cols-12 pt-16">
             <h1
-                class="flex justify-start"
+                class="col-start-4 text-2xl ml-20"
                 :class="{
                     'text-white': theme1,
                     'text-text2': theme2,
                     'text-text3': theme3,
                 }"
             >
-                calc
+                <span>calc</span>
             </h1>
-            <div class="flex justify-end"><h1>1122</h1></div>
+            <toggle-switch
+                class="col-end-9 ml-10"
+                @theme="theme = $event"
+            ></toggle-switch>
         </div>
-
-        <!-- screen -->
-        <div
-            class="rounded-xl p-8 w-5/12 h-32 m-6 overflow-hidden text-right grid items-center"
-            :class="{
-                'bg-screen1': theme1,
-                'bg-screen2': theme2,
-                'bg-screen3': theme3,
-            }"
-        >
-            <h1
-                class="text-5xl"
+        <div class="grid justify-items-center">
+            <!-- screen -->
+            <div
+                class="rounded-xl p-8 w-5/12 h-32 m-6 overflow-hidden text-right grid items-center"
                 :class="{
-                    'text-white': theme1,
-                    'text-text2': theme2,
-                    'text-text3': theme3,
+                    'bg-screen1': theme1,
+                    'bg-screen2': theme2,
+                    'bg-screen3': theme3,
                 }"
             >
-                {{ counter }}
-            </h1>
-        </div>
-        <!-- keypad -->
-        <div
-            class="rounded-xl p-8 grid justify-items-stretch"
-            :class="{
-                'bg-keypad1': theme1,
-                'bg-keypad2': theme2,
-                'bg-screen3': theme3,
-            }"
-        >
-            <div class="flex items-center">
-                <key
-                    v-for="key in 3"
-                    :key="key"
-                    :label="key + 6"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @keycap="calculation"
-                ></key>
-                <key
-                    :label="'del'"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @counter="calculation"
-                    @click="del()"
-                ></key>
+                <h1
+                    class="text-5xl"
+                    :class="{
+                        'text-white': theme1,
+                        'text-text2': theme2,
+                        'text-text3': theme3,
+                    }"
+                >
                     {{
                         new Intl.NumberFormat("en-US", {
                             style: "decimal",
                         }).format(counter)
                     }}
+                </h1>
             </div>
-            <div class="flex items-center">
-                <key
-                    v-for="key in 3"
-                    :key="key"
-                    :label="key + 3"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @keycap="calculation"
-                ></key>
-                <key
-                    :label="'+'"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @keycap="calculation"
-                ></key>
+            <!-- keypad -->
+            <div
+                class="rounded-xl p-8 w-5/12 grid justify-items-stretch"
+                :class="{
+                    'bg-keypad1': theme1,
+                    'bg-keypad2': theme2,
+                    'bg-screen3': theme3,
+                }"
+            >
+                <div class="flex items-center">
+                    <key
+                        v-for="key in 3"
+                        :key="key"
+                        :label="key + 6"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @keycap="calculation"
+                    ></key>
+                    <key
+                        :label="'del'"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @counter="calculation"
+                        @click="del()"
+                    ></key>
+                </div>
+                <div class="flex items-center">
+                    <key
+                        v-for="key in 3"
+                        :key="key"
+                        :label="key + 3"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @keycap="calculation"
+                    ></key>
+                    <key
+                        :label="'+'"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @keycap="calculation"
+                    ></key>
+                </div>
+                <div class="flex items-center">
+                    <key
+                        v-for="key in 3"
+                        :key="key"
+                        :label="key"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @keycap="calculation"
+                    ></key>
+                    <key
+                        :label="'-'"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @keycap="calculation"
+                    ></key>
+                </div>
+                <div class="flex items-center">
+                    <key
+                        :label="'.'"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @keycap="calculation"
+                    ></key>
+                    <key
+                        :label="0"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @keycap="calculation"
+                    ></key>
+                    <key
+                        :label="'/'"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @keycap="calculation"
+                    ></key>
+                    <key
+                        :label="'X'"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @keycap="calculation"
+                    ></key>
+                </div>
+                <div class="flex items-center">
+                    <key
+                        :label="'reset'"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @keycap="calculation"
+                    ></key>
+                    <key
+                        :label="'='"
+                        :theme1="theme1"
+                        :theme2="theme2"
+                        :theme3="theme3"
+                        @keycap="calculation"
+                        @click="equal('again')"
+                    ></key>
+                </div>
             </div>
-            <div class="flex items-center">
-                <key
-                    v-for="key in 3"
-                    :key="key"
-                    :label="key"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @keycap="calculation"
-                ></key>
-                <key
-                    :label="'-'"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @keycap="calculation"
-                ></key>
-            </div>
-            <div class="flex items-center">
-                <key
-                    :label="'.'"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @keycap="calculation"
-                ></key>
-                <key
-                    :label="0"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @keycap="calculation"
-                ></key>
-                <key
-                    :label="'/'"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @keycap="calculation"
-                ></key>
-                <key
-                    :label="'X'"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @keycap="calculation"
-                ></key>
-            </div>
-            <div class="flex items-center">
-                <key
-                    :label="'reset'"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @keycap="calculation"
-                ></key>
-                <key
-                    :label="'='"
-                    :theme1="theme1"
-                    :theme2="theme2"
-                    :theme3="theme3"
-                    @keycap="calculation"
-                    @click="equal('again')"
-                ></key>
-            </div>
-        </div>
-        <div class="flex items-center">
-            <button @click="theme = 1">hello</button>
-            <button @click="theme = 2">hello</button>
-            <button @click="theme = 3">hello</button>
         </div>
     </div>
 </template>
 
 <script>
 import key from "./components/keypad";
+import toggleSwitch from "./components/ToggleSwitch";
 export default {
     name: "App",
-    components: { key },
+    components: { key, toggleSwitch },
     data() {
         return {
             theme: 1,
